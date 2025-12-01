@@ -2,10 +2,43 @@ import java.util.List;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class RentalSystem {
-    private List<Vehicle> vehicles = new ArrayList<>();
-    private List<Customer> customers = new ArrayList<>();
-    private RentalHistory rentalHistory = new RentalHistory();
+public class RentalSystem
+
+{
+	// singleton instance
+	private static RentalSystem instance; 
+	// Refactored for constructor 
+    private List<Vehicle> vehicles;
+    private List<Customer> customers;
+    private RentalHistory rentalHistory;
+    
+    
+    
+    
+    
+    //Constructor
+    
+    private RentalSystem() 
+    {
+        vehicles = new ArrayList<>();
+        customers = new ArrayList<>();
+        rentalHistory = new RentalHistory();
+    }
+    
+    
+    
+    
+    
+    //  method to get instance
+    public static RentalSystem getInstance() 
+    {
+        if (instance == null) {
+            instance = new RentalSystem();
+        }
+        return instance;
+    }
+    
+    
 
     public void addVehicle(Vehicle vehicle) {
         vehicles.add(vehicle);
