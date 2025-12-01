@@ -58,24 +58,38 @@ public class VehicleRentalApp {
 		            	vehicle = null;
 		            }
                     
-                    if (vehicle != null){
-	                    vehicle.setLicensePlate(plate);
-	                    rentalSystem.addVehicle(vehicle);
-                    }
-                    else {
-	                    System.out.println("Vehicle not added successfully.");
+                    // Update to check if item was added 
+                    if (vehicle != null) {
+                        vehicle.setLicensePlate(plate);
+                        boolean added = rentalSystem.addVehicle(vehicle);
+
+                        if (added) {
+                            System.out.println("Vehicle has been added.");
+                        } else {
+                            System.out.println("Item Not Added. A vehicle with this plate already exists.");
+                        }
+                    } else {
+                        System.out.println("Vehicle not added.");
                     }
                     break;
 
+                    
                 case 2:
-                    System.out.print("Enter customer ID: ");
-                    int cid = scanner.nextInt();
-                    scanner.nextLine(); // Consume the leftover newline
-                    System.out.print("Enter name: ");
-                    String cname = scanner.nextLine();
+                	// Updated to Check Customer ID
+                	System.out.print("Enter customer ID: ");
+                	int cid = scanner.nextInt();
+                	scanner.nextLine();
+                	System.out.print("Enter name: ");
+                	String cname = scanner.nextLine();
 
-                    rentalSystem.addCustomer(new Customer(cid, cname));
-                    System.out.println("Customer added successfully.");
+                	Customer customer = new Customer(cid, cname);
+                	boolean added = rentalSystem.addCustomer(customer);
+
+                	if (added) {
+                	    System.out.println("Customer added successfully.");
+                	} else {
+                	    System.out.println("Customer not added. A customer with this ID already exists.");
+                	}
                     break;
                     
                 case 3:

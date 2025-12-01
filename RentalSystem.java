@@ -182,15 +182,39 @@ public class RentalSystem
     
     // Refactored to make it possible to save instances 
 
-    public void addVehicle(Vehicle vehicle) {
+    public boolean addVehicle(Vehicle vehicle) {
+        // Check for duplicate license plate
+        Vehicle existing = findVehicleByPlate(vehicle.getLicensePlate());
+        if (existing != null) {
+            System.out.println("A vehicle with plate " + vehicle.getLicensePlate() + " already exists. Vehicle not added.");
+            return false; 
+        }
+
+        // If no duplicate then add to list
         vehicles.add(vehicle);
-        saveVehicle(vehicle); 
+        saveVehicle(vehicle);
+
+        return true; 
     }
 
-    public void addCustomer(Customer customer) {
+    // Same thing but for customer ID
+    public boolean addCustomer(Customer customer) {
+        // Check for duplicate customer ID
+        Customer existing = findCustomerById(customer.getCustomerId());
+        if (existing != null) {
+            System.out.println("A customer with ID " + customer.getCustomerId() + " already exists. Customer not added.");
+            return false;  
+        }
+
         customers.add(customer);
-        saveCustomer(customer); 
+        saveCustomer(customer);
+
+        return true; 
     }
+    
+    
+    
+    
     
     
     
