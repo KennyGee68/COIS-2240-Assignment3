@@ -1,0 +1,10 @@
+# macOS files
+.DS_Store
+
+# Eclipse metadata
+.project
+.classpath
+
+# Eclipse build directories
+/bin/
+
