@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
+import java.lang.reflect.Constructor;  
+import java.lang.reflect.Modifier;     
 
 public class VehicleRentalTest {
 
@@ -79,5 +81,27 @@ public class VehicleRentalTest {
     }
 
     
+    
+    
+    @Test
+    public void testSingletonRentalSystem() throws Exception {
+
+        // get private constructor
+        Constructor<RentalSystem> constructor = RentalSystem.class.getDeclaredConstructor();
+        int modifiers = constructor.getModifiers();
+
+        // constructor is private
+        assertEquals(Modifier.PRIVATE, modifiers);
+
+        // get instance
+        RentalSystem instance1 = RentalSystem.getInstance();
+        RentalSystem instance2 = RentalSystem.getInstance();
+
+        // instance should not be null
+        assertNotNull(instance1);
+
+        // both references should point to the same object
+        assertSame(instance1, instance2);
+    }
 
 }
