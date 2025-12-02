@@ -58,15 +58,22 @@ public class VehicleRentalApp {
 		            	vehicle = null;
 		            }
                     
+                    
                     // Update to check if item was added 
                     if (vehicle != null) {
-                        vehicle.setLicensePlate(plate);
-                        boolean added = rentalSystem.addVehicle(vehicle);
+                        try {
+                            vehicle.setLicensePlate(plate);  // added try catch for task 2
 
-                        if (added) {
-                            System.out.println("Vehicle has been added.");
-                        } else {
-                            System.out.println("Item Not Added. A vehicle with this plate already exists.");
+                            boolean added = rentalSystem.addVehicle(vehicle);
+
+                            if (added) {
+                                System.out.println("Vehicle has been added.");
+                            } else {
+                                System.out.println("Item Not Added. A vehicle with this plate already exists.");
+                            }
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Invalid license plate: " + e.getMessage());
+                            System.out.println("Vehicle not added.");
                         }
                     } else {
                         System.out.println("Vehicle not added.");
