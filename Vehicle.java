@@ -15,7 +15,31 @@ public abstract class Vehicle {
         return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
     }
     
-    
+ // Validates license plate: 3 letters followed by 3 digits
+    private boolean isValidPlate(String plate) {
+
+        if (plate == null) {
+            return false;
+        }
+
+        plate = plate.trim();
+
+        if (plate.length() != 6) {
+            return false;
+        }
+
+        // First 3 must be letters
+        if (!Character.isLetter(plate.charAt(0))) return false;
+        if (!Character.isLetter(plate.charAt(1))) return false;
+        if (!Character.isLetter(plate.charAt(2))) return false;
+
+        // Last 3 must be numbers
+        if (!Character.isDigit(plate.charAt(3))) return false;
+        if (!Character.isDigit(plate.charAt(4))) return false;
+        if (!Character.isDigit(plate.charAt(5))) return false;
+
+        return true;
+    }
     
     
     
@@ -34,7 +58,12 @@ public abstract class Vehicle {
     }
 
     public void setLicensePlate(String plate) {
-        this.licensePlate = plate == null ? null : plate.toUpperCase();
+
+        if (!isValidPlate(plate)) {
+            throw new IllegalArgumentException("Plate must be 3 letters then 3 digits.");
+        }
+        // Make everything uppercase
+        this.licensePlate = plate.toUpperCase();
     }
 
     public void setStatus(VehicleStatus status) {
