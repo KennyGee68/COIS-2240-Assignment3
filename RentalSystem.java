@@ -347,7 +347,21 @@ public class RentalSystem
         return null;
     }
     
-   
+   //////////////////////////
+    // GUI Getters
+    public List<RentalRecord> getRentalRecords() {
+        return rentalHistory.getRentalHistory();
+    }
+    
+    public List<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+    
+    // ///////////////////
     
     
     
